@@ -3,6 +3,8 @@ import time
 from datetime import datetime
 browser = webdriver.Chrome()
 instock = False
+curtime = datetime.now()
+dt_string = curtime.strftime("%d/%m/%Y %H:%M:%S")
 
 page = input("Please enter the link for the item: ")
 def menu():
@@ -31,10 +33,10 @@ def check_stock(check_page):
     browser.get(check_page)
     try: 
         elem = browser.find_element_by_xpath('//button[text()="Add to Cart"]')
-        print(f"[{datetime.now()}]: Item is in stock")
+        print(f"[{dt_string}]: Item is in stock")
         instock = True
     except:
-        print(f"[{datetime.now()}]: Out of stock")  
+        print(f"[{dt_string}]: Out of stock")  
 def add_cart(buy_page):
     global browser
     try: 
