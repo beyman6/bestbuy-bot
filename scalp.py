@@ -1,3 +1,4 @@
+# Importation
 from selenium import webdriver
 import time
 from datetime import datetime
@@ -7,11 +8,16 @@ conn = smtplib.SMTP('smtp.gmail.com',587)
 conn.ehlo()
 conn.starttls()
 conn.login('gpustockcheck12@gmail.com','gPuP@sSw0rD')
-#Email Setup End
-browser = webdriver.Chrome()
+#Browser Setup
+optch = input("Do you want to load your Google Chrome profile? (Y/N): ")
+if optch == "Y":
+    usrprof = input("Enter the path to your Chrome profile (eg. C:\Users\(username)\AppData\Local\Google\Chrome\User Data\Default) : ")
+    options = webdriver.ChromeOptions(f"user-data-dir={usrprof}")
+    browser = webdriver.Chrome(chrome_options=options)
+else:
+    browser = webdriver.Chrome()
+
 instock = False
-curtime = datetime.now()
-dt_string = curtime.strftime("%d/%m/%Y %H:%M:%S")
 usremail = ""
 page = input("Please enter the link for the item: ")
 def menu():
@@ -42,6 +48,8 @@ def check_stock(check_page):
     global browser
     global instock
     browser.get(check_page)
+    curtime = datetime.now()
+    dt_string = curtime.strftime("%d/%m/%Y %H:%M:%S")
     try: 
         elem = browser.find_element_by_xpath('//button[text()="Add to Cart"]')
         print(f"[{dt_string}]: Item is in stock")
@@ -66,7 +74,6 @@ def time_check(chk_page):
         time.sleep(60)
     if instock == True:
         send_email()
-        
         add_cart(chk_page)
         time.sleep(5)
         elem = browser.find_element_by_xpath('//button[text()="Checkout"]')
