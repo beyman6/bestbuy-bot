@@ -1,6 +1,8 @@
 # bestbuy-bot
 Bot for stock checking on Best Buy/Automating the purchase of an item
 
+#Email functionality
+Bot has the ability to send emails whenever an item is in stock, please dont steal the login info
 
 #How to Install
 
