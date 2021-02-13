@@ -9,14 +9,8 @@ conn.ehlo()
 conn.starttls()
 conn.login('gpustockcheck12@gmail.com','gPuP@sSw0rD')
 #Browser Setup
-optch = input("Do you want to load your Google Chrome profile? (Y/N): ")
-if optch == "Y":
-    usrprof = input("Enter the path to your Chrome profile (eg. C:\Users\(username)\AppData\Local\Google\Chrome\User Data\Default) : ")
-    options = webdriver.ChromeOptions(f"user-data-dir={usrprof}")
-    browser = webdriver.Chrome(chrome_options=options)
-else:
-    browser = webdriver.Chrome()
 
+browser = webdriver.Chrome()
 instock = False
 usremail = ""
 page = input("Please enter the link for the item: ")
